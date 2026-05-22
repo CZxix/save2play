@@ -30,5 +30,10 @@ A gaming savings tracker where you add games you want to buy, track your savings
   - [x] Real-time substring filter mapping on character search input arrays
   - [x] Advanced collection sorting metrics (Newest, Oldest, Highest, and Lowest amounts)
   - [x] Non-destructive clearing state handlers backed by confirmation safety gates
-- [ ] Sprint 5 — Purchased Page
+- [x] Sprint 5 — Purchased Page 🏆
+  - [x] Trophy shelf displaying all completed savings goals
+  - [x] Summary strip (total purchased, total spent, latest purchase)
+  - [x] Search and sort purchased games dynamically
+  - [x] Remove individual trophy items or clear all with safety prompts
+  - [x] Auto-populated immediately when a dashboard goal hits 100%
 - [ ] Sprint 6 — Final Polish
