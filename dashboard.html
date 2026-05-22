@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Save2Play — Dashboard</title>
-  <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -48,7 +48,7 @@
     <div class="nav-container">
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="history.html">History</a></li>
         <li><a href="purchased.html">Purchased</a></li>
       </ul>
@@ -56,7 +56,6 @@
   </nav>
 
   <main class="dashboard-layout">
-    
     <aside class="sidebar">
       <div class="sidebar-card">
         <p class="sidebar-label">Total Active Goals</p>
@@ -75,14 +74,11 @@
       </div>
 
       <div id="game-grid" class="game-grid">
-        
         <div id="empty-state" class="empty-state">
           <p>No active savings goals found. Click '+ Add Game' above to level up! 🕹️</p>
         </div>
-
       </div>
     </section>
-
   </main>
 
   <div id="modal-overlay" class="modal-overlay">

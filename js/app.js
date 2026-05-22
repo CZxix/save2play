@@ -112,7 +112,6 @@ function getRemaining(game) {
   return Math.max(game.price - game.saved, 0);
 }
 
-// Ensure f-strings/template literals format percentages nicely
 function getProgress(game) {
   return Math.min((game.saved / game.price) * 100, 100).toFixed(1);
 }
@@ -132,9 +131,8 @@ function renderGames() {
   const emptyState = document.getElementById('empty-state');
   const gameCount  = document.getElementById('game-count');
 
-  if (!grid) return; // Guard clause if not on the dashboard view
+  if (!grid) return; 
 
-  // Remove old cards safely
   const oldCards = grid.querySelectorAll('.game-card');
   oldCards.forEach(c => c.remove());
 
@@ -156,7 +154,7 @@ function renderGames() {
     card.setAttribute('data-id', game.id);
     card.innerHTML = `
       <div class="card-header">
-        <h3 class="card-title">${game.title}</h3>
+        <h3 class="card-title" title="${game.title}">${game.title}</h3>
         <div class="card-actions">
           <button class="btn-icon" title="Edit"   onclick="openEditModal(${game.id})">✏️</button>
           <button class="btn-icon" title="Delete" onclick="deleteGame(${game.id})">🗑️</button>
@@ -227,7 +225,7 @@ function openDepositModal(id) {
   if (modalBody) {
     modalBody.innerHTML = `
       <label>Amount to Add (₱)</label>
-      <input type="number" id="deposit-amount" placeholder="e.g. 500" />
+      <input type="number" id="deposit-amount" placeholder="e.g. 500" min="1" />
       <p class="deposit-info">
         Current: <strong>${formatMoney(game.saved)}</strong> / 
         Goal: <strong>${formatMoney(game.price)}</strong> — 
@@ -370,3 +368,25 @@ function confirmEdit(id) {
   renderGames();
   updateSidebarStats();
 }
+
+// ============================================
+//   ACTIVE NAV HIGHLIGHT
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+  const links = document.querySelectorAll('.nav-links a');
+  links.forEach(link => {
+    if (link.href === window.location.href) {
+      link.classList.add('active');
+    }
+  });
+});
+
+// ============================================
+//   ESCAPE KEY MODAL LISTENER
+// ============================================
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeModal();
+    resetModal();
+  }
+});
