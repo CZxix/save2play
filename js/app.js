@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================
-//   ESCAPE KEY MODAL LISTENER
+//   ESCAPE KEY DISMISS TRACKER
 // ============================================
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
