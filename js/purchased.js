@@ -44,7 +44,7 @@ function renderPurchased(data = null) {
     card.setAttribute('data-id', game.id);
     card.innerHTML = `
       <div class="purchased-badge">✅ Goal Reached</div>
-      <p class="purchased-title">${game.title}</p>
+      <p class="purchased-title" title="${game.title}">${game.title}</p>
       <div class="purchased-meta">
         <div>
           <p class="stat-label">Final Price</p>
