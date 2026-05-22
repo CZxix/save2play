@@ -1,97 +1,103 @@
 // ============================================
-//   CALCULATIONS
+//   DEPOSIT MODAL & TRANSACTION ENGINE
 // ============================================
-function getRemaining(game) {
-  return Math.max(game.price - game.saved, 0);
+function openDepositModal(id) {
+  const game = games.find(g => g.id === id);
+  if (!game) return;
+
+  // Reuse the add modal framework but dynamically repurpose it for deposits
+  const overlay = document.getElementById('modal-overlay');
+  if (overlay) overlay.classList.add('active');
+
+  const modal = document.querySelector('.modal');
+  if (modal) {
+    modal.setAttribute('data-mode', 'deposit');
+    modal.setAttribute('data-id', id);
+  }
+
+  const modalHeader = document.querySelector('.modal-header h3');
+  if (modalHeader) modalHeader.textContent = `Add Savings — ${game.title}`;
+
+  const modalBody = document.querySelector('.modal-body');
+  if (modalBody) {
+    modalBody.innerHTML = `
+      <label>Amount to Add (₱)</label>
+      <input type="number" id="deposit-amount" placeholder="e.g. 500" />
+      <p class="deposit-info">
+        Current: <strong>${formatMoney(game.saved)}</strong> / 
+        Goal: <strong>${formatMoney(game.price)}</strong> — 
+        Remaining: <strong>${formatMoney(getRemaining(game))}</strong>
+      </p>
+    `;
+  }
+
+  const submitBtn = document.querySelector('.btn-primary-sm');
+  if (submitBtn) submitBtn.setAttribute('onclick', `confirmDeposit(${id})`);
 }
 
-function getProgress(game) {
-  return Math.min((game.saved / game.price) * 100, 100).toFixed(1);
-}
-
-function formatMoney(amount) {
-  return '₱' + amount.toLocaleString('en-PH', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
-}
-
-// ============================================
-//   RENDER GAMES
-// ============================================
-function renderGames() {
-  const grid       = document.getElementById('game-grid');
-  const emptyState = document.getElementById('empty-state');
-  const gameCount  = document.getElementById('game-count');
-
-  if (!grid) return; // Guard clause if not on the dashboard view layout
-
-  // Remove old cards safely (keeps the baseline empty state container)
-  const oldCards = grid.querySelectorAll('.game-card');
-  oldCards.forEach(c => c.remove());
-
-  if (games.length === 0) {
-    if (emptyState) emptyState.style.display = 'block';
-    if (gameCount) gameCount.textContent = '0 games';
+function confirmDeposit(id) {
+  const amount = parseFloat(document.getElementById('deposit-amount').value);
+  if (!amount || amount <= 0) {
+    alert('Please enter a valid amount.');
     return;
   }
 
-  if (emptyState) emptyState.style.display = 'none';
-  if (gameCount) gameCount.textContent = `${games.length} game${games.length > 1 ? 's' : ''}`;
+  const index = games.findIndex(g => g.id === id);
+  if (index === -1) return;
 
-  games.forEach(game => {
-    const progress  = getProgress(game);
-    const remaining = getRemaining(game);
-    const card      = document.createElement('div');
-    
-    card.classList.add('game-card');
-    card.setAttribute('data-id', game.id);
-    card.innerHTML = `
-      <div class="card-header">
-        <h3 class="card-title">${game.title}</h3>
-        <div class="card-actions">
-          <button class="btn-icon" title="Edit"   onclick="openEditModal(${game.id})">✏️</button>
-          <button class="btn-icon" title="Delete" onclick="deleteGame(${game.id})">🗑️</button>
-        </div>
-      </div>
-      <div class="card-progress">
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: ${progress}%"></div>
-        </div>
-        <span class="progress-percent">${progress}%</span>
-      </div>
-      <div class="card-stats">
-        <div class="card-stat">
-          <p class="stat-label">Saved</p>
-          <p class="stat-value green">${formatMoney(game.saved)}</p>
-        </div>
-        <div class="card-stat">
-          <p class="stat-label">Remaining</p>
-          <p class="stat-value red">${formatMoney(remaining)}</p>
-        </div>
-        <div class="card-stat">
-          <p class="stat-label">Goal</p>
-          <p class="stat-value">${formatMoney(game.price)}</p>
-        </div>
-      </div>
-      <button class="btn-deposit" onclick="openDepositModal(${game.id})">
-        + Add Savings
-      </button>
-    `;
-    grid.appendChild(card);
-  });
+  // Increment savings state safely capped at retail retail boundary limit
+  games[index].saved = Math.min(games[index].saved + amount, games[index].price);
+
+  // Log ledger information to systemic audit history
+  logTransaction(games[index].title, amount);
+
+  // Check if target boundary criteria is fully achieved
+  if (games[index].saved >= games[index].price) {
+    moveToPurchased(games[index]);
+    games.splice(index, 1);
+  }
+
+  saveGames();
+  closeModal();
+  resetModal();
+  renderGames();
+  updateSidebarStats();
 }
 
-// ============================================
-//   SIDEBAR STATS
-// ============================================
-function updateSidebarStats() {
-  const totalGoals = document.getElementById('total-goals');
-  const totalSaved = document.getElementById('total-saved');
+function logTransaction(gameTitle, amount) {
+  const history = JSON.parse(localStorage.getItem('save2play-history') || '[]');
+  history.unshift({
+    id:     Date.now(),
+    game:   gameTitle,
+    amount: amount,
+    date:   new Date().toLocaleDateString()
+  });
+  localStorage.setItem('save2play-history', JSON.stringify(history));
+}
 
-  if (!totalGoals) return;
+function moveToPurchased(game) {
+  const purchased = JSON.parse(localStorage.getItem('save2play-purchased') || '[]');
+  purchased.unshift({ ...game, purchasedAt: new Date().toLocaleDateString() });
+  localStorage.setItem('save2play-purchased', JSON.stringify(purchased));
+  alert(`🎉 Congrats! You can now buy "${game.title}"!`);
+}
 
-  totalGoals.textContent = games.length;
-  const sum = games.reduce((acc, g) => acc + g.saved, 0);
-  if (totalSaved) totalSaved.textContent = formatMoney(sum);
+function resetModal() {
+  const modalHeader = document.querySelector('.modal-header h3');
+  if (modalHeader) modalHeader.textContent = 'Add New Game';
+
+  const modalBody = document.querySelector('.modal-body');
+  if (modalBody) {
+    modalBody.innerHTML = `
+      <label>Game Title</label>
+      <input type="text" id="game-title" placeholder="e.g. Elden Ring DLC" />
+      <label>Target Price (₱)</label>
+      <input type="number" id="game-price" placeholder="e.g. 2000" />
+      <label>Amount Already Saved (₱)</label>
+      <input type="number" id="game-saved" placeholder="e.g. 500" />
+    `;
+  }
+
+  const submitBtn = document.querySelector('.btn-primary-sm');
+  if (submitBtn) submitBtn.setAttribute('onclick', 'addGame()');
 }
