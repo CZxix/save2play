@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Save2Play — Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 50" class="logo-svg">
+        <defs>
+          <filter id="cyan-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter id="magenta-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <g transform="translate(5, 5)">
+          <g transform="translate(0, 2)">
+            <rect x="2" y="2" width="36" height="36" rx="8" fill="#0B0E14" stroke="#00F0FF" stroke-width="1.5" filter="url(#cyan-glow)"/>
+            <rect x="17" y="9" width="6" height="22" rx="1.5" fill="#151A24" stroke="rgba(0, 240, 255, 0.4)" stroke-width="1"/>
+            <rect x="9" y="17" width="22" height="6" rx="1.5" fill="#151A24" stroke="rgba(0, 240, 255, 0.4)" stroke-width="1"/>
+            <circle cx="20" cy="20" r="2.5" fill="#00F0FF"/>
+            <circle cx="29" cy="13" r="2" fill="#FF007F" filter="url(#magenta-glow)"/>
+            <circle cx="29" cy="27" r="2" fill="#FF007F" filter="url(#magenta-glow)"/>
+          </g>
+          <text x="52" y="28" font-family="'Segoe UI', sans-serif" font-size="20" font-weight="900" fill="#00F0FF" letter-spacing="1" filter="url(#cyan-glow)">SAVE</text>
+          <rect x="111" y="10" width="16" height="22" rx="4" fill="#151A24" stroke="#FF007F" stroke-width="1.5" filter="url(#magenta-glow)"/>
+          <text x="115" y="27" font-family="'Segoe UI', sans-serif" font-size="15" font-weight="900" fill="#ffffff">2</text>
+          <text x="135" y="28" font-family="'Segoe UI', sans-serif" font-size="20" font-weight="900" fill="#FF007F" letter-spacing="1" filter="url(#magenta-glow)">PLAY</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><a href="history.html">History</a></li>
+        <li><a href="purchased.html">Purchased</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="dashboard-layout">
+    
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <p class="sidebar-label">Total Active Goals</p>
+        <h2 id="total-goals" class="sidebar-value">0</h2>
+      </div>
+      <div class="sidebar-card">
+        <p class="sidebar-label">Total Saved Funds</p>
+        <h2 id="total-saved" class="sidebar-value">₱0.00</h2>
+      </div>
+    </aside>
+
+    <section class="dashboard-content">
+      <div class="dashboard-header">
+        <h2>Active Goals <span id="game-count" class="badge">0 games</span></h2>
+        <button class="btn-primary" onclick="openModal()">+ Add Game</button>
+      </div>
+
+      <div id="game-grid" class="game-grid">
+        
+        <div id="empty-state" class="empty-state">
+          <p>No active savings goals found. Click '+ Add Game' above to level up! 🕹️</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add New Game</h3>
+        <button class="btn-close" onclick="closeModal()">×</button>
+      </div>
+      
+      <div class="modal-body">
+        <label>Game Title</label>
+        <input type="text" id="game-title" placeholder="e.g. Elden Ring DLC" />
+        
+        <label>Target Price (₱)</label>
+        <input type="number" id="game-price" placeholder="e.g. 2000" />
+        
+        <label>Amount Already Saved (₱)</label>
+        <input type="number" id="game-saved" placeholder="e.g. 500" />
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn-primary-sm" onclick="addGame()">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Save2Play — Built by Clark Angel De Leon 🎮</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
