@@ -24,6 +24,11 @@ A gaming savings tracker where you add games you want to buy, track your savings
   - [x] Hooked up transactional auditing logs to track ledger histories with localized timestamps
   - [x] Implemented inline dataset edit updates and item deletion state pruning
   - [x] Bound global data tracking properties to persistent LocalStorage pipelines
-- [ ] Sprint 4 — History Page
+- [x] Sprint 4 — History Page 📋
+  - [x] Full transaction log tracking of every micro-deposit entry
+  - [x] Summary scoreboard widgets calculating total logs, funds, and unique items
+  - [x] Real-time substring filter mapping on character search input arrays
+  - [x] Advanced collection sorting metrics (Newest, Oldest, Highest, and Lowest amounts)
+  - [x] Non-destructive clearing state handlers backed by confirmation safety gates
 - [ ] Sprint 5 — Purchased Page
 - [ ] Sprint 6 — Final Polish
