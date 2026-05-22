@@ -119,7 +119,7 @@ main {
   margin: 0 auto;
 }
 
-/* === HERO SECTION === */
+/* === INTERACTIVE HERO LAYOUT === */
 .hero {
   display: flex;
   justify-content: space-between;
@@ -130,14 +130,14 @@ main {
 }
 
 .hero-content {
-  max-width: 520px;
+  max-width: 550px;
 }
 
 .hero-content h1 {
   font-size: 3.5rem;
   font-weight: 800;
   line-height: 1.15;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
   text-transform: uppercase;
   letter-spacing: -0.5px;
 }
@@ -150,11 +150,11 @@ main {
 .hero-content p {
   font-size: 1.15rem;
   color: var(--text-muted);
-  margin-bottom: 2rem;
-  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
 }
 
-/* Spacebar Casing Style 3D Action Button */
+/* Mechanical Switch Style 3D Action Button */
 .btn-primary {
   display: inline-block;
   background-color: var(--bg-navbar);
@@ -201,7 +201,7 @@ main {
   border-left: 4px solid var(--accent-neon);
   border-radius: 12px;
   padding: 2rem;
-  width: 280px;
+  width: 310px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -228,19 +228,21 @@ main {
   margin-bottom: 1.5rem;
 }
 
+/* Glowing Neon Charging Chamber Bar */
 .hero-progress-bar {
   background-color: var(--bg-primary);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 999px;
-  height: 10px;
-  margin-bottom: 0.8rem;
+  border-radius: 6px;
+  height: 12px;
+  margin-bottom: 0.9rem;
   overflow: hidden;
+  padding: 1px;
 }
 
 .hero-progress-fill {
   height: 100%;
   background: linear-gradient(90deg, #00bfff, var(--accent-neon));
-  border-radius: 999px;
+  border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
 }
 
@@ -278,6 +280,7 @@ main {
   margin: 0 auto;
 }
 
+/* Mechanical Housing Switch Grid Module */
 .features-grid .feature-card {
   background-color: var(--bg-navbar);
   border: 1px solid rgba(255, 255, 255, 0.03);
@@ -327,7 +330,7 @@ footer {
   margin-top: 4rem;
 }
 
-/* === RESPONSIVE BREAKPOINTS (768px Media Adaptations) === */
+/* === RESPONSIVE MEDIA QUERIES (Unified Breakpoint Matrix) === */
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
@@ -373,7 +376,7 @@ footer {
     font-size: 0.8rem;
     padding: 0.5rem 0.9rem;
   }
-  
+
   .section-title {
     font-size: 1.8rem;
     margin-bottom: 2rem;
