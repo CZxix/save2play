@@ -124,9 +124,9 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4rem 1rem;
-  gap: 4rem;
-  min-height: 75vh;
+  padding: 5rem 1rem;
+  gap: 3rem;
+  min-height: 80vh;
 }
 
 .hero-content {
@@ -144,7 +144,7 @@ main {
 
 .highlight {
   color: var(--accent-neon);
-  text-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
 }
 
 .hero-content p {
@@ -177,11 +177,10 @@ main {
 
 .btn-primary:hover {
   background-color: #1a202c;
-  color: #ffffff;
   border-color: var(--accent-active);
   box-shadow: 
     inset 0 3px 0 rgba(255, 255, 255, 0.05),
-    0 6px 20px rgba(255, 0, 127, 0.3),
+    0 6px 20px rgba(255, 0, 127, 0.35),
     0 6px 0px 0px var(--accent-active);
 }
 
@@ -204,7 +203,7 @@ main {
   padding: 2rem;
   width: 280px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .hero-card:hover {
