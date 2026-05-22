@@ -38,7 +38,7 @@ function renderHistory(data = null) {
       <div class="history-left">
         <div class="history-icon">💰</div>
         <div class="history-info">
-          <p class="history-game">${entry.game}</p>
+          <p class="history-game" title="${entry.game}">${entry.game}</p>
           <p class="history-date">${entry.date}</p>
         </div>
       </div>

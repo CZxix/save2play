@@ -64,7 +64,6 @@ function addGame() {
   const price  = parseFloat(document.getElementById('game-price').value);
   const saved  = parseFloat(document.getElementById('game-saved').value) || 0;
 
-  // Validation Matrix
   if (!title) {
     alert('Please enter a game title.');
     return;
@@ -90,7 +89,6 @@ function addGame() {
     createdAt: new Date().toLocaleDateString()
   };
 
-  // Automated Routing
   if (saved >= price) {
     let purchased = JSON.parse(localStorage.getItem('save2play-purchased') || '[]');
     purchased.unshift({ ...newGame, purchasedAt: new Date().toLocaleDateString() });
@@ -249,7 +247,6 @@ function confirmDeposit(id) {
   if (index === -1) return;
 
   games[index].saved = Math.min(games[index].saved + amount, games[index].price);
-
   logTransaction(games[index].title, amount);
 
   if (games[index].saved >= games[index].price) {
@@ -382,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================
-//   ESCAPE KEY DISMISS TRACKER
+//   ESCAPE KEY INTERCEPTOR LISTENER
 // ============================================
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
