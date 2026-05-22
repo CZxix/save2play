@@ -21,7 +21,6 @@ function renderHistory(data = null) {
 
   if (!list) return;
 
-  // Clear old rows safely (preserves the baseline empty state block)
   const oldRows = list.querySelectorAll('.history-item');
   oldRows.forEach(r => r.remove());
 
@@ -39,7 +38,7 @@ function renderHistory(data = null) {
       <div class="history-left">
         <div class="history-icon">💰</div>
         <div class="history-info">
-          <p class="history-game">${entry.game}</p>
+          <p class="history-game" title="${entry.game}">${entry.game}</p>
           <p class="history-date">${entry.date}</p>
         </div>
       </div>
@@ -82,12 +81,10 @@ function filterHistory() {
   const sort   = document.getElementById('sort-select').value;
   let   items  = getHistory();
 
-  // Filter by search parameters
   if (query) {
     items = items.filter(e => e.game.toLowerCase().includes(query));
   }
 
-  // Sort Metrics Machine
   switch (sort) {
     case 'oldest':  
       items.sort((a, b) => a.id - b.id);            
@@ -121,3 +118,15 @@ function clearHistory() {
   renderHistory();
   updateSummary();
 }
+
+// ============================================
+//   ACTIVE NAV HIGHLIGHT
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+  const links = document.querySelectorAll('.nav-links a');
+  links.forEach(link => {
+    if (link.href === window.location.href) {
+      link.classList.add('active');
+    }
+  });
+});
