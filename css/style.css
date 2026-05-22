@@ -894,6 +894,120 @@ footer {
   margin-bottom: 0.5rem;
 }
 
+/* ==========================================================================
+   SPRINT 5 — PURCHASED WALL INTERACTIVE SHOWCASE STYLES
+   ========================================================================== */
+.purchased-page {  
+  padding: 2.5rem 3rem;  
+  max-width: 1000px;  
+  margin: 0 auto;
+}
+
+/* === PURCHASED GRID === */
+.purchased-grid {  
+  display: grid;  
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));  
+  gap: 1.5rem;
+}
+
+/* === PURCHASED CARD === */
+.purchased-card {  
+  background: linear-gradient(145deg, #111c2e, #0f1e35);  
+  border: 1px solid #59ABBD;  
+  border-radius: 16px;  
+  padding: 1.8rem 1.5rem;  
+  display: flex;  
+  flex-direction: column;  
+  gap: 1rem;  
+  position: relative;  
+  overflow: hidden;  
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.purchased-card:hover {  
+  transform: translateY(-4px);  
+  box-shadow: 0 8px 30px rgba(89, 171, 189, 0.2);
+}
+
+/* Shimmer victory top accent bar line */
+.purchased-card::before {  
+  content: '';  
+  position: absolute;  
+  top: 0; left: 0; right: 0;  
+  height: 3px;  
+  background: linear-gradient(90deg, #59ABBD, #77c4d4, #59ABBD);
+}
+
+.purchased-badge {  
+  display: inline-flex;  
+  align-items: center;  
+  gap: 0.4rem;  
+  background-color: rgba(89, 171, 189, 0.15);  
+  border: 1px solid rgba(89, 171, 189, 0.4);  
+  color: #59ABBD;  
+  font-size: 0.72rem;  
+  font-weight: bold;  
+  text-transform: uppercase;  
+  letter-spacing: 1px;  
+  padding: 0.3rem 0.7rem;  
+  border-radius: 999px;  
+  width: fit-content;
+}
+
+.purchased-title {  
+  font-size: 1.1rem;  
+  font-weight: bold;  
+  color: #ffffff;
+}
+
+.purchased-meta {  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;
+}
+
+.purchased-price {  
+  font-size: 1.3rem;  
+  font-weight: bold;  
+  color: #4caf8a;
+}
+
+.purchased-date {  
+  font-size: 0.78rem;  
+  color: #a0b0c0;  
+  text-align: right;
+}
+
+.purchased-date span {  
+  display: block;  
+  color: #ffffff;  
+  font-size: 0.85rem;
+}
+
+.purchased-progress {  
+  height: 6px;  
+  background: linear-gradient(90deg, #59ABBD, #77c4d4);  
+  border-radius: 999px;  
+  width: 100%;
+}
+
+.btn-remove-purchased {  
+  background: none;  
+  border: 1px solid #1e3a50;  
+  color: #a0b0c0;  
+  padding: 0.5rem;  
+  border-radius: 8px;  
+  font-size: 0.8rem;  
+  cursor: pointer;  
+  transition: border-color 0.2s, color 0.2s;  
+  width: 100%;
+}
+
+.btn-remove-purchased:hover {  
+  border-color: #e05c5c;  
+  color: #e05c5c;
+}
+
 /* === RESPONSIVE MEDIA QUERIES (Unified Breakpoint Matrix) === */
 @media (max-width: 768px) {
   .hero {
@@ -929,4 +1043,8 @@ footer {
   .history-page { padding: 1.5rem; }
   .history-filters { flex-direction: column; }
   .history-summary { flex-direction: column; }
+
+  /* Purchased Page Responsive Layouts */
+  .purchased-page { padding: 1.5rem; }
+  .purchased-grid { grid-template-columns: 1fr; }
 }
