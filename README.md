@@ -1,4 +1,5 @@
 ## Save2Play 🎮
+https://czxix.github.io/save2play/index.html
 
 A gaming savings tracker where you add games you want to buy, track your savings, and monitor progress until you can afford them.
 
